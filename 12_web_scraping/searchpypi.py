@@ -14,7 +14,7 @@ from bs4 import BeautifulSoup
 PYPI = 'https://pypi.org'
 SELECTOR = '.unstyled > li > a'
 # number of search results to open in new tab
-NUM_LINKS = 5
+NUM_OPEN = 5
 
 search = ' '.join(sys.argv[1:]) 
 
@@ -30,7 +30,7 @@ pypi_response.raise_for_status()
 
 pypi_soup = BeautifulSoup(pypi_response.text, 'html.parser')
 
-top_results = pypi_soup.select(SELECTOR)[:5]
+top_results = pypi_soup.select(SELECTOR)[:NUM_OPEN]
 
 for res in top_results:
     res_link = PYPI + res.get('href')
